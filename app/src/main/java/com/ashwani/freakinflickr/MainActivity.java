@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements GetFlickrJsonData.OnDataAvailable {
     private static final String TAG = "MainActivity";
 
     @Override
@@ -18,7 +20,23 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        GetRawData getRawData=new GetRawData(this);
+//        getRawData.execute("https://api.flickr.com/services/feeds/photos_public.gne?tags=android&tagmode=any&format=json&nojsoncallback=1");
+
+
         Log.d(TAG, "onCreate: Ends");
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume Starts");
+        super.onResume();
+        GetFlickrJsonData getFlickrJsonData=new GetFlickrJsonData(this,
+                "https://api.flickr.com/services/feeds/photos_public.gne","en-us",
+                true);
+//        getFlickrJsonData.executeOnSameThread("android, nougat");
+        getFlickrJsonData.execute("android,nougat");
+        Log.d(TAG, "onResume ends");
     }
 
     @Override
@@ -44,5 +62,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onOptionsItemSelected: returned");
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDataAvailable(List<Photo> data, DownloadStatus status){
+        if (status==DownloadStatus.OK){
+            Log.d(TAG, "onDataAvailable: data is "+data);
+        }else{
+            Log.e(TAG, "onDataAvailable failed with status "+status);
+        }
     }
 }
