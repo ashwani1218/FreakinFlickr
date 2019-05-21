@@ -51,7 +51,7 @@ class FlickrRecylerViewAdapter extends RecyclerView.Adapter<FlickrRecylerViewAda
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: called");
+//        Log.d(TAG, "getItemCount: called");
         return ((photoList != null) && (photoList.size() != 0) ? photoList.size() : 0);
     }
 

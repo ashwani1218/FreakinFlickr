@@ -1,6 +1,10 @@
 package com.ashwani.freakinflickr;
 
-class Photo {
+import java.io.Serializable;
+
+class Photo implements Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     private String title;
     private String author;
