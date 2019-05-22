@@ -1,6 +1,7 @@
 package com.ashwani.freakinflickr;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,15 +21,19 @@ public class PhotoDetailActivity extends BaseActivity {
 
         Photo photo = (Photo) intent.getSerializableExtra(PHOTO_TRANSFER);
 
+        Resources resources = getResources();
+        String text_title = resources.getString(R.string.photo_text_title, photo.getTitle());
+        String text_tags = resources.getString(R.string.photo_text_tags, photo.getTags());
+
         if (photo != null) {
             TextView photoTitle = findViewById(R.id.photo_title);
-            photoTitle.setText("Title: " + photo.getTitle());
+            photoTitle.setText(text_title);
 
             TextView photoTags = findViewById(R.id.photo_tags);
-            photoTags.setText("Tags: " + photo.getTags());
+            photoTags.setText(text_tags);
 
             TextView photoAuthor = findViewById(R.id.photo_author);
-            photoAuthor.setText("Author: " + photo.getAuthor());
+            photoAuthor.setText(photo.getAuthor());
 
             ImageView photoImage = (ImageView) findViewById(R.id.photo_image);
             Picasso.with(this).load(photo.getLink())
