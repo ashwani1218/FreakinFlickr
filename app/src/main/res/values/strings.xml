@@ -7,4 +7,5 @@
     <string name="photo_text_title">Title: %s</string>
     <string name="photo_text_tags">Tags: %s</string>
     <string name="activity_search">Search</string>
+    <string name="searchable_hint">Enter Photo Tags</string>
 </resources>
